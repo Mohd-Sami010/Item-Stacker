@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
     private bool isDropped = false;
     private bool checkedForRest = false;
     private float restTimer = 1f;
-    private float motionDuration = 3f;
+    private float motionDuration = 2f;
 
     [SerializeField] private TextMeshPro textMesh;
     [SerializeField] private Color[] itemTextMeshColors;

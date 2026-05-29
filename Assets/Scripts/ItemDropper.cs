@@ -19,7 +19,7 @@ public class ItemDropper : MonoBehaviour
     }
     void Start()
     {
-        StartCoroutine(SpawnNewItemWithAnimation());
+        SpawnItem();
         GameManager.Instance.OnContinue += () =>
         {
             StartCoroutine(SpawnNewItemWithAnimation());
