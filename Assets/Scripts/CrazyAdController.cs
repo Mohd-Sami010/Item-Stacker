@@ -67,7 +67,7 @@ public class CrazyAdsController : MonoBehaviour
     /// <summary>
     /// Displays a standard Midgame Interstitial ad break.
     /// </summary>
-    public void ShowMidgameAd(System.Action onAdComplete = null)
+    public void ShowMidgameAd(Action onAdComplete = null)
     {
         if (!CrazySDK.IsAvailable || !CrazySDK.IsInitialized)
         {

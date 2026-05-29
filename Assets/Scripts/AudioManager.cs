@@ -76,6 +76,7 @@ public class AudioManager : MonoBehaviour
     }
     private void PlayRandomPitch(AudioSource audioSource, float minPitch = 0.9f, float maxPitch = 1.1f)
     {
+        if (audioSource == null || audioSource.clip == null) return;
         audioSource.pitch = Random.Range(minPitch, maxPitch);
         audioSource.PlayOneShot(audioSource.clip);
     }
