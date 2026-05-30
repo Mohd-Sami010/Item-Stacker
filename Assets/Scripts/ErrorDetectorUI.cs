@@ -40,11 +40,11 @@ public class ErrorDetectorUI : MonoBehaviour
         if (type == LogType.Error || type == LogType.Exception)
         {
             Show();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
             errorTextMesh.text = "Error: " + condition + "\n" + stackTrace;
         }
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
 
     }
     private void Show()
