@@ -26,7 +26,7 @@ public class HudUI : MonoBehaviour
     {
         scoreText.text = ScoreManager.Instance.GetScore().ToString();
         highScoreText.text = ScoreManager.Instance.GetHighScore().ToString();
-        towerHeightText.text = $"{2 * ScoreManager.Instance.TowerHeight():F1}";
+        towerHeightText.text = $"{ScoreManager.Instance.TowerHeight():F1}";
     }
     void OnDestroy()
     {

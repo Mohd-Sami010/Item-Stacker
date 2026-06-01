@@ -7451,7 +7451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tower Height
+  m_text: Stack Height
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 86806feef248e5f46a78a2db18e26eb3, type: 2}
   m_sharedMaterial: {fileID: 6544486206467071174, guid: 86806feef248e5f46a78a2db18e26eb3, type: 2}

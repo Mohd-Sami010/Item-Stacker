@@ -1,4 +1,5 @@
 using UnityEngine;
+using CrazyGames;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,13 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+    private void Start()
+    {
+        CrazySDK.Init(() =>
+        {
+            CrazySDK.Game.GameplayStart();
+        });
+    }
     private void Update()
     {
         if (isGameOver) return;
@@ -25,12 +33,14 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         OnGameOver?.Invoke();
+        CrazySDK.Game.GameplayStop();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
     public void ContinueGame()
     {
         OnContinue?.Invoke();
+        CrazySDK.Game.GameplayStart();
         isGameOver = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

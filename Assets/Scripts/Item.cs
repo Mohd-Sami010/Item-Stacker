@@ -64,7 +64,7 @@ public class Item : MonoBehaviour
         if (ItemDropper.Instance != null) ItemDropper.Instance.SpawnNewItem();
         isDropped = false;
         checkedForRest = false;
-        ScoreManager.Instance.ItemStacked(transform.position.y);
+        ScoreManager.Instance.ItemStacked(transform.position.y + 0.5f);
         GameObject effect = Instantiate(itemStopEffectPrefab, transform.position, Quaternion.identity);
         Destroy(effect, 2f);
         AudioManager.Instance.PlayItemStopSound();
