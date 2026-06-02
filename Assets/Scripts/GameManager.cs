@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
     private void Start()
     {
@@ -34,16 +32,12 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         OnGameOver?.Invoke();
         CrazySDK.Game.GameplayStop();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
     public void ContinueGame()
     {
         OnContinue?.Invoke();
         CrazySDK.Game.GameplayStart();
         isGameOver = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
     public void RestartGame()
     {

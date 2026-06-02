@@ -5,6 +5,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    [SerializeField] private AudioListener audioListener;
+
     [Header("Other Audio")]
     [SerializeField] private AudioSource gameOverAudioSource;
     [SerializeField] private AudioSource ambientAudioSource;
@@ -22,16 +24,6 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        // if (Instance == null)
-        // {
-        //     Instance = this;
-        //     DontDestroyOnLoad(gameObject);
-        // }
-        // else
-        // {
-        //     Destroy(gameObject);
-        //     return;
-        // }
     }
     void Start()
     {
@@ -48,6 +40,10 @@ public class AudioManager : MonoBehaviour
     {
         gameOverAudioSource.Stop();
         ambientAudioSource.Play();
+    }
+    public void MuteSound(bool shouldMute)
+    {
+        audioListener.enabled = !shouldMute;
     }
     public void PlayButtonClickSound()
     {

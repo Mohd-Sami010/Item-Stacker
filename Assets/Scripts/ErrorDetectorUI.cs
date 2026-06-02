@@ -14,9 +14,6 @@ public class ErrorDetectorUI : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         closeButton.onClick.AddListener(() =>
         {
-            Hide();
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
         });
         // copyButton.onClick.AddListener(() => {
         //     try
@@ -40,8 +37,6 @@ public class ErrorDetectorUI : MonoBehaviour
         if (type == LogType.Error || type == LogType.Exception)
         {
             Show();
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
 
             errorTextMesh.text = "Error: " + condition + "\n" + stackTrace;
         }
