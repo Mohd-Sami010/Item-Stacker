@@ -15,6 +15,10 @@ public class AdUI : MonoBehaviour
         adLoadingUI.SetActive(true);
         adFailedUI.SetActive(false);
     }
+    public void HideAdLoadingUI()
+    {
+        adLoadingUI.SetActive(false);
+    }
     public void ShowAdFailedUI()
     {
         adLoadingUI.SetActive(false);

@@ -8,7 +8,7 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private Button adToContinueButton;
     [SerializeField] private Button restartButton;
-    [SerializeField] private GameObject adFailedPanel;
+    [SerializeField] private AdUI adUI;
 
     private bool continuedOnce = false;
 
@@ -23,17 +23,19 @@ public class GameOverUI : MonoBehaviour
 
         adToContinueButton.onClick.AddListener(() =>
         {
+            adUI.ShowAdLoadingUI();
             CrazyAdsController.Instance.ShowRewardedAd((bool isSuccessful) =>
     {
         if (isSuccessful)
         {
+            adUI.HideAdLoadingUI();
             GameManager.Instance.ContinueGame();
             AudioManager.Instance.PlayButtonClickSound();
             continuedOnce = true;
         }
         else
         {
-            adFailedPanel.SetActive(true);
+            adUI.ShowAdFailedUI();
         }
     });
         });
@@ -42,6 +44,8 @@ public class GameOverUI : MonoBehaviour
             AudioManager.Instance.PlayButtonClickSound();
             if (GameManager.Instance.ShouldPlayInterstitialAd())
             {
+
+                adUI.ShowAdLoadingUI();
                 CrazyAdsController.Instance.ShowMidgameAd(onAdComplete: () =>
                 {
                     GameManager.Instance.RestartGame();
