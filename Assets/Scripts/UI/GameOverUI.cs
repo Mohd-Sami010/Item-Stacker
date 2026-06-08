@@ -24,7 +24,30 @@ public class GameOverUI : MonoBehaviour
         adToContinueButton.onClick.AddListener(() =>
         {
             adUI.ShowAdLoadingUI();
-            CrazyAdsController.Instance.ShowRewardedAd((bool isSuccessful) =>
+            if (GameManager.Instance.IsDesktop()) PlayCrazyGamesRewardAd();
+            else Debug.Log("Google Reward Ad");
+        });
+        restartButton.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+            if (GameManager.Instance.ShouldPlayInterstitialAd())
+            {
+
+                adUI.ShowAdLoadingUI();
+                if (GameManager.Instance.IsDesktop()) PlayCrazyGamesMidGameAd();
+                else Debug.Log("Google Midgame Ad");
+            }
+            else
+            {
+                GameManager.Instance.RestartGame();
+            }
+        });
+
+        gameObject.SetActive(false);
+    }
+    private void PlayCrazyGamesRewardAd()
+    {
+        CrazyAdsController.Instance.ShowRewardedAd((bool isSuccessful) =>
     {
         if (isSuccessful)
         {
@@ -38,30 +61,20 @@ public class GameOverUI : MonoBehaviour
             adUI.ShowAdFailedUI();
         }
     });
-        });
-        restartButton.onClick.AddListener(() =>
-        {
-            AudioManager.Instance.PlayButtonClickSound();
-            if (GameManager.Instance.ShouldPlayInterstitialAd())
-            {
-
-                adUI.ShowAdLoadingUI();
-                CrazyAdsController.Instance.ShowMidgameAd(onAdComplete: () =>
+    }
+    private void PlayCrazyGamesMidGameAd()
+    {
+        CrazyAdsController.Instance.ShowMidgameAd(onAdComplete: () =>
                 {
                     GameManager.Instance.RestartGame();
                 });
-            }
-            else
-            {
-                GameManager.Instance.RestartGame();
-            }
-        });
-
-        gameObject.SetActive(false);
     }
     private void ShowGameOverUI()
     {
-        CrazyAdsController.Instance.PrefetchRewardedAd();
+        if (GameManager.Instance.IsDesktop())
+        {
+            CrazyAdsController.Instance.PrefetchRewardedAd();
+        }
 
         scoreText.text = $"{ScoreManager.Instance.GetScore()}";
         highScoreText.text = $"{ScoreManager.Instance.GetHighScore()}";

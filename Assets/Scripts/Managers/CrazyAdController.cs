@@ -26,6 +26,12 @@ public class CrazyAdsController : MonoBehaviour
 
     private void Start()
     {
+        if (!GameManager.Instance.IsDesktop())
+        {
+            Instance = null;
+            Destroy(gameObject);
+            return;
+        }
         // Fallback initialization check if a scene is launched straight from the editor
         if (CrazySDK.IsAvailable && !CrazySDK.IsInitialized)
         {

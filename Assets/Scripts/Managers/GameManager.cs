@@ -11,16 +11,22 @@ public class GameManager : MonoBehaviour
 
     private float playTime = 0f;
 
+    [SerializeField] private bool isDesktop = true;
+
     private void Awake()
     {
         Instance = this;
+        if (Application.isMobilePlatform) isDesktop = false;
     }
     private void Start()
     {
-        CrazySDK.Init(() =>
+        if (isDesktop)
         {
-            CrazySDK.Game.GameplayStart();
-        });
+            CrazySDK.Init(() =>
+            {
+                CrazySDK.Game.GameplayStart();
+            });
+        }
     }
     private void Update()
     {
@@ -31,12 +37,12 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         OnGameOver?.Invoke();
-        CrazySDK.Game.GameplayStop();
+        if (isDesktop) CrazySDK.Game.GameplayStop();
     }
     public void ContinueGame()
     {
         OnContinue?.Invoke();
-        CrazySDK.Game.GameplayStart();
+        if (isDesktop) CrazySDK.Game.GameplayStart();
         isGameOver = false;
     }
     public void RestartGame()
@@ -47,5 +53,9 @@ public class GameManager : MonoBehaviour
     public bool ShouldPlayInterstitialAd()
     {
         return playTime >= 20f;
+    }
+    public bool IsDesktop()
+    {
+        return isDesktop;
     }
 }
