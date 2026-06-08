@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f8493a0fc00a44499d95949191efde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDesktop: 1
+  isDesktop: 0
 --- !u!4 &108933039
 Transform:
   m_ObjectHideFlags: 0
