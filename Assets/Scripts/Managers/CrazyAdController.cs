@@ -26,12 +26,6 @@ public class CrazyAdsController : MonoBehaviour
 
     private void Start()
     {
-        if (!GameManager.Instance.IsDesktop())
-        {
-            Instance = null;
-            Destroy(gameObject);
-            return;
-        }
         // Fallback initialization check if a scene is launched straight from the editor
         if (CrazySDK.IsAvailable && !CrazySDK.IsInitialized)
         {
@@ -85,19 +79,16 @@ public class CrazyAdsController : MonoBehaviour
             CrazyAdType.Midgame,
             () =>
             {
-                AudioManager.Instance.MuteSound(true);
                 Debug.Log("[CrazyAds] Midgame ad started.");
             },
             (error) =>
             {
                 Debug.LogWarning($"[CrazyAds] Midgame ad error: {error}");
-                AudioManager.Instance.MuteSound(false);
                 onAdComplete?.Invoke(); // still proceed even on error
             },
             () =>
             {
                 Debug.Log("[CrazyAds] Midgame ad finished.");
-                AudioManager.Instance.MuteSound(false);
                 onAdComplete?.Invoke();
             }
         );
@@ -120,18 +111,15 @@ public class CrazyAdsController : MonoBehaviour
             CrazyAdType.Rewarded,
             () =>
             {
-                AudioManager.Instance.MuteSound(true);
                 Debug.Log("Rewarded ad started playback.");
             },
             (error) =>
             {
-                AudioManager.Instance.MuteSound(false);
                 Debug.LogWarning($"Rewarded ad failed to render: {error}");
                 onAdResult?.Invoke(false); // Return False
             },
             () =>
             {
-                AudioManager.Instance.MuteSound(false);
                 Debug.Log("Rewarded ad completed cleanly.");
                 onAdResult?.Invoke(true);  // Return True
             }

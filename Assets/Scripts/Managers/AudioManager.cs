@@ -41,10 +41,6 @@ public class AudioManager : MonoBehaviour
         gameOverAudioSource.Stop();
         ambientAudioSource.Play();
     }
-    public void MuteSound(bool shouldMute)
-    {
-        audioListener.enabled = !shouldMute;
-    }
     public void PlayButtonClickSound()
     {
         PlayRandomPitch(buttonClickAudioSource);

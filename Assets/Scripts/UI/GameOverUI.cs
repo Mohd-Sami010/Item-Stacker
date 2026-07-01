@@ -24,8 +24,7 @@ public class GameOverUI : MonoBehaviour
         adToContinueButton.onClick.AddListener(() =>
         {
             adUI.ShowAdLoadingUI();
-            if (GameManager.Instance.IsDesktop()) PlayCrazyGamesRewardAd();
-            else Debug.Log("Google Reward Ad");
+            PlayCrazyGamesRewardAd();
         });
         restartButton.onClick.AddListener(() =>
         {
@@ -34,8 +33,7 @@ public class GameOverUI : MonoBehaviour
             {
 
                 adUI.ShowAdLoadingUI();
-                if (GameManager.Instance.IsDesktop()) PlayCrazyGamesMidGameAd();
-                else Debug.Log("Google Midgame Ad");
+                PlayCrazyGamesMidGameAd();
             }
             else
             {
@@ -71,10 +69,7 @@ public class GameOverUI : MonoBehaviour
     }
     private void ShowGameOverUI()
     {
-        if (GameManager.Instance.IsDesktop())
-        {
-            CrazyAdsController.Instance.PrefetchRewardedAd();
-        }
+        CrazyAdsController.Instance.PrefetchRewardedAd();
 
         scoreText.text = $"{ScoreManager.Instance.GetScore()}";
         highScoreText.text = $"{ScoreManager.Instance.GetHighScore()}";

@@ -15,8 +15,7 @@ public class HudUI : MonoBehaviour
         inputActions = new InputSystem_Actions();
         inputActions.Enable();
 
-        if (GameManager.Instance.IsDesktop()) inputActions.Player.ToggleControlsGuide.performed += ctx => ToggleControlsGuide();
-        else controlsGuidePanel.SetActive(false);
+        inputActions.Player.ToggleControlsGuide.performed += ctx => ToggleControlsGuide();
 
         ScoreManager.Instance.OnScoreChanged += UpdateScore;
         UpdateScore();
@@ -34,10 +33,7 @@ public class HudUI : MonoBehaviour
     void OnDestroy()
     {
         ScoreManager.Instance.OnScoreChanged -= UpdateScore;
-        if (GameManager.Instance.IsDesktop())
-        {
-            inputActions.Player.ToggleControlsGuide.performed -= ctx => ToggleControlsGuide();
-        }
+        inputActions.Player.ToggleControlsGuide.performed -= ctx => ToggleControlsGuide();
         inputActions.Disable();
     }
 }

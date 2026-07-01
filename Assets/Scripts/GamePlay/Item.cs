@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
     }
     void Update()
     {
+        if (GameManager.Instance.IsGameOver()) return;
         if (isDropped && checkedForRest && rb.velocity.sqrMagnitude < 1.5f)
         {
             motionDuration -= Time.deltaTime;
@@ -35,12 +36,6 @@ public class Item : MonoBehaviour
             {
                 SetBodyToStatic();
             }
-        }
-        if (isDropped && transform.position.y < -10f)
-        {
-            GameManager.Instance.GameOver();
-            Destroy(gameObject);
-            return;
         }
         if (!isDropped || !checkedForRest) return;
 
@@ -72,6 +67,13 @@ public class Item : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         checkedForRest = true;
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            AudioManager.Instance.PlayItemHitSound();
+            if (!GameManager.Instance.IsGameOver()) GameManager.Instance.GameOver();
+            checkedForRest = false;
+        }
     }
     public void Drop()
     {
