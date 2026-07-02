@@ -47,11 +47,14 @@ public class ItemDropper : MonoBehaviour
     {
         if (currentItem == null) return;
         currentItem.Drop();
+        CameraController.Instance.SetTarget(currentItem.transform);
+
         currentItem = null;
         AudioManager.Instance.PlayCraneReleaseItemSound();
     }
     public void SpawnNewItem()
     {
+        CameraController.Instance.SetTarget(null);
         StartCoroutine(SpawnNewItemWithAnimation());
     }
     private void RotateItem()
@@ -78,27 +81,27 @@ public class ItemDropper : MonoBehaviour
     private System.Collections.IEnumerator SpawnNewItemWithAnimation()
     {
         AudioManager.Instance.PlayCraneSpawnItemSound();
-        Vector3 originalPosition = transform.position;
+        Vector3 originalPosition = transform.localPosition;
         Vector3 upPosition = originalPosition + new Vector3(0f, 5f, 0f);
         float animationDuration = 0.5f;
         float elapsed = 0f;
 
         while (elapsed < animationDuration)
         {
-            transform.position = Vector3.Lerp(originalPosition, upPosition, elapsed / animationDuration);
+            transform.position = Vector3.Lerp(transform.parent.position + originalPosition, transform.parent.position + upPosition, elapsed / animationDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.position = upPosition;
+        transform.position = transform.parent.position + upPosition;
         SpawnItem();
         elapsed = 0f;
         while (elapsed < animationDuration)
         {
-            transform.position = Vector3.Lerp(upPosition, originalPosition, elapsed / animationDuration);
+            transform.position = Vector3.Lerp(transform.parent.position + upPosition, transform.parent.position + originalPosition, elapsed / animationDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.position = originalPosition;
+        transform.position = transform.parent.position + originalPosition;
     }
     void OnDestroy()
     {

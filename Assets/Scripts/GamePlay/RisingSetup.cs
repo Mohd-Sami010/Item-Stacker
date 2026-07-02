@@ -4,11 +4,18 @@ public class RisingSetup : MonoBehaviour
 {
     [SerializeField] private GameObject mainCamera;
     [SerializeField] private GameObject itemDropper;
+    [SerializeField] private float offsetY = -1f;
 
-    private void Start()
+    private void Update()
     {
-        transform.position = new Vector3(0f, 0f, 0f);
-        itemDropper.transform.position = new Vector3(0f, 7f, 0f);
+        if (GameManager.Instance.IsGameOver()) return;
 
+        float towerHeight = ScoreManager.Instance.TowerHeight();
+
+        if (towerHeight > 5f)
+        {
+            float smoothSpeed = 0.125f;
+            transform.position = Vector3.Lerp(transform.position, new Vector3(0f, towerHeight + offsetY, 0f), smoothSpeed * Time.deltaTime * 60f);
+        }
     }
 }

@@ -5,6 +5,7 @@ public class Item : MonoBehaviour
 {
     private bool isDropped = false;
     private bool checkedForRest = false;
+    private bool hitGround = false;
     private float restTimer = 1f;
     private float motionDuration = 2f;
 
@@ -24,7 +25,7 @@ public class Item : MonoBehaviour
     }
     void Update()
     {
-        if (GameManager.Instance.IsGameOver()) return;
+        if (GameManager.Instance.IsGameOver() || hitGround) return;
         if (isDropped && checkedForRest && rb.velocity.sqrMagnitude < 1.5f)
         {
             motionDuration -= Time.deltaTime;
@@ -66,6 +67,7 @@ public class Item : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (hitGround) return;
         checkedForRest = true;
 
         if (collision.gameObject.CompareTag("Ground"))
@@ -73,6 +75,7 @@ public class Item : MonoBehaviour
             AudioManager.Instance.PlayItemHitSound();
             if (!GameManager.Instance.IsGameOver()) GameManager.Instance.GameOver();
             checkedForRest = false;
+            hitGround = true;
         }
     }
     public void Drop()

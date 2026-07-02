@@ -2159,6 +2159,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2284,6 +2285,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1761500796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88e03af69fc7984ca3e204cfb7c4b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  smoothSpeed: 0.125
+  deadZone: 3.8
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &573436279
 GameObject:
   m_ObjectHideFlags: 0
@@ -5109,6 +5126,7 @@ MonoBehaviour:
   - {fileID: 7731418430494917694, guid: 3a75d91e1043dae41b98556a901f631b, type: 3}
   - {fileID: 7731418430494917694, guid: b4237295ed544ca49acb67b541dacf7d, type: 3}
   - {fileID: 7731418430494917694, guid: 8a70c7573db11754a9e5f427e9b12562, type: 3}
+  - {fileID: 7731418430494917694, guid: f4a8438397fc7a344b4aa574e6a14d6c, type: 3}
   - {fileID: 7731418430494917694, guid: 6baea53ad453abd47939eff5d5e8aafb, type: 3}
   - {fileID: 7731418430494917694, guid: 199ec59bea3206b4a8dad7e985d04c4d, type: 3}
   - {fileID: 7731418430494917694, guid: d0418f2c5239e1a488fef611c0906cc0, type: 3}
@@ -6705,6 +6723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420028}
   itemDropper: {fileID: 1230275679}
+  offsetY: -3
 --- !u!1 &1856188711
 GameObject:
   m_ObjectHideFlags: 0
