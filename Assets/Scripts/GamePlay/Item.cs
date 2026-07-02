@@ -20,7 +20,7 @@ public class Item : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         int colorIndex = Random.Range(0, itemTextMeshColors.Length);
         textMesh.color = itemTextMeshColors[colorIndex];
-
+        // transform.localScale = Vector3.one * Random.Range(0.8f, 1.2f);
     }
     void Update()
     {

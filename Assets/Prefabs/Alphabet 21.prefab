@@ -204,8 +204,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 3.236833e-11, y: -0.0034660103}
-  m_Size: {x: 0.19, y: 0.3}
+  m_Offset: {x: 4.254082e-17, y: -0.0022145018}
+  m_Size: {x: 0.18999968, y: 0.3901161}
   m_Direction: 0
 --- !u!1 &4337388156795157690
 GameObject:
@@ -428,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 202568829273926609, guid: 3a971306ad5a5ea429585643afa64d45, type: 3}
       propertyPath: m_Mass
-      value: 0.74555784
+      value: 0.6471933
       objectReference: {fileID: 0}
     - target: {fileID: 2188476601537649945, guid: 3a971306ad5a5ea429585643afa64d45, type: 3}
       propertyPath: m_LocalPosition.x
