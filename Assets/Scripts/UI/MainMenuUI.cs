@@ -7,6 +7,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button shopButton;
     [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private GameObject loadingUIObject;
 
     [Header("Socials")]
     [SerializeField] private Button instagramButton;
@@ -14,7 +15,11 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        playButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene"));
+        playButton.onClick.AddListener(() =>
+        {
+            loadingUIObject.SetActive(true);
+            Invoke(nameof(LoadGameScene), 1f);
+        });
         shopButton.onClick.AddListener(() => Debug.Log("Shop button clicked!"));
         highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
 
@@ -23,5 +28,9 @@ public class MainMenuUI : MonoBehaviour
 
         string youtubeURL = "https://www.youtube.com/@SamiCode_Games";
         youtubeButton.onClick.AddListener(() => Application.OpenURL(youtubeURL));
+    }
+    private void LoadGameScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("GameScene");
     }
 }
