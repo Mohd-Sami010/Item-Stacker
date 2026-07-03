@@ -18,9 +18,10 @@ public class MainMenuUI : MonoBehaviour
         playButton.onClick.AddListener(() =>
         {
             loadingUIObject.SetActive(true);
+            playButton.GetComponent<AudioSource>().Play();
             Invoke(nameof(LoadGameScene), 1f);
         });
-        shopButton.onClick.AddListener(() => Debug.Log("Shop button clicked!"));
+        shopButton.onClick.AddListener(() => shopButton.GetComponent<AudioSource>().Play());
         highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
 
         string instagramURL = "https://www.instagram.com/mohd_sami501";
