@@ -4,6 +4,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
     private int score = 0;
+    private int money = 0;
     private float highestStackHeight = 0f;
 
     public event System.Action OnScoreChanged;
@@ -19,11 +20,14 @@ public class ScoreManager : MonoBehaviour
         {
             highestStackHeight = itemHeight;
             score += 10;
+            money += 3;
         }
         else
         {
             score += 5;
+            money += 1;
         }
+        PlayerPrefs.SetInt("Money", money);
         if (PlayerPrefs.GetInt("HighScore", 0) < score)
         {
             PlayerPrefs.SetInt("HighScore", score);
@@ -39,7 +43,11 @@ public class ScoreManager : MonoBehaviour
     {
         return PlayerPrefs.GetInt("HighScore", 0);
     }
-    public float TowerHeight()
+    public int GetMoney()
+    {
+        return money;
+    }
+    public float GetStackHeight()
     {
         return highestStackHeight;
     }

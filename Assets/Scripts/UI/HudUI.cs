@@ -5,6 +5,7 @@ public class HudUI : MonoBehaviour
     private InputSystem_Actions inputActions;
     [SerializeField] private TMPro.TextMeshProUGUI highScoreText;
     [SerializeField] private TMPro.TextMeshProUGUI scoreText;
+    [SerializeField] private TMPro.TextMeshProUGUI moneyText;
     [SerializeField] private TMPro.TextMeshProUGUI towerHeightText;
 
     [Space]
@@ -26,9 +27,10 @@ public class HudUI : MonoBehaviour
     }
     private void UpdateScore()
     {
+        moneyText.text = ScoreManager.Instance.GetMoney().ToString();
         scoreText.text = ScoreManager.Instance.GetScore().ToString();
         highScoreText.text = ScoreManager.Instance.GetHighScore().ToString();
-        towerHeightText.text = $"{ScoreManager.Instance.TowerHeight():F1}";
+        towerHeightText.text = $"{ScoreManager.Instance.GetStackHeight():F1}";
     }
     void OnDestroy()
     {

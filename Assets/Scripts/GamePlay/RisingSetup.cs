@@ -10,7 +10,7 @@ public class RisingSetup : MonoBehaviour
     {
         if (GameManager.Instance.IsGameOver()) return;
 
-        float towerHeight = ScoreManager.Instance.TowerHeight();
+        float towerHeight = ScoreManager.Instance.GetStackHeight();
 
         if (towerHeight > 5f)
         {
