@@ -94,6 +94,8 @@ public class ItemDropper : MonoBehaviour
         }
         transform.position = transform.parent.position + upPosition;
         SpawnItem();
+        Item item = currentItem;
+        currentItem = null;
         elapsed = 0f;
         while (elapsed < animationDuration)
         {
@@ -102,6 +104,7 @@ public class ItemDropper : MonoBehaviour
             yield return null;
         }
         transform.position = transform.parent.position + originalPosition;
+        currentItem = item;
     }
     void OnDestroy()
     {
