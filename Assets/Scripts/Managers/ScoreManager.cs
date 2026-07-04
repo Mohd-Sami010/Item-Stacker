@@ -3,6 +3,9 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
+
+    [SerializeField] private bool resetHighScore = false;
+    [SerializeField] private bool resetMoney = false;
     private int score = 0;
     private int money = 0;
     private int moneyAtStart = 0;
@@ -14,6 +17,9 @@ public class ScoreManager : MonoBehaviour
     {
         Instance = this;
         // PlayerPrefs.SetInt("HighScore", 0);
+        if (resetHighScore) PlayerPrefs.SetInt("HighScore", 0);
+        if (resetMoney) PlayerPrefs.SetInt("Money", 0);
+
         money = PlayerPrefs.GetInt("Money", 0);
         moneyAtStart = money;
     }

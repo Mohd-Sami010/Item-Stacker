@@ -10,12 +10,19 @@ public class GameEnvironment : MonoBehaviour
     [SerializeField] private SpriteRenderer backgroundRenderer;
     [SerializeField] private Sprite[] backgroundSprites;
 
+    [Header("Ground")]
+    [SerializeField] private GameObject theme0Ground;
+    [SerializeField] private GameObject theme1Ground;
+
     private void Awake()
     {
         Instance = this;
-        // int backgroundIndex = PlayerPrefs.GetInt("ThemeIndex", 0);
-        int backgroundIndex = themeIndex;
-        backgroundRenderer.sprite = backgroundSprites[backgroundIndex];
+        themeIndex = PlayerPrefs.GetInt("ThemeIndex", 0);
+        // int backgroundIndex = themeIndex;
+        backgroundRenderer.sprite = backgroundSprites[themeIndex];
+
+        theme0Ground.SetActive(themeIndex == 0);
+        theme1Ground.SetActive(themeIndex == 1);
     }
     public int GetThemeIndex()
     {
