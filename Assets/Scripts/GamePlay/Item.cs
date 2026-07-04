@@ -9,19 +9,32 @@ public class Item : MonoBehaviour
     private float restTimer = 1f;
     private float motionDuration = 2f;
 
-    [SerializeField] private TextMeshPro textMesh;
-    [SerializeField] private Color[] itemTextMeshColors;
     [SerializeField] private GameObject itemStopEffectPrefab;
+    [SerializeField] private TextMeshPro textMesh;
+    [Header("Theme Colors")]
+    [SerializeField] private Color[] theme0ItemTextMeshColors;
+    [SerializeField] private Color[] theme1ItemTextMeshColors;
+    [SerializeField] private TMP_FontAsset theme1ItemTextMeshFont;
 
+    private Color[] currentThemeColors;
     private Rigidbody2D rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Static;
-        int colorIndex = Random.Range(0, itemTextMeshColors.Length);
-        textMesh.color = itemTextMeshColors[colorIndex];
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+        int colorIndex = Random.Range(0, theme0ItemTextMeshColors.Length);
+        textMesh.color = theme0ItemTextMeshColors[colorIndex];
         // transform.localScale = Vector3.one * Random.Range(0.8f, 1.2f);
+        if (GameEnvironment.Instance.GetThemeIndex() == 1)
+        {
+            currentThemeColors = theme1ItemTextMeshColors;
+            textMesh.font = theme1ItemTextMeshFont;
+            int theme1ColorIndex = Random.Range(0, currentThemeColors.Length);
+            textMesh.color = currentThemeColors[theme1ColorIndex];
+        }
+
     }
     void Update()
     {
@@ -57,6 +70,7 @@ public class Item : MonoBehaviour
     private void SetBodyToStatic()
     {
         rb.bodyType = RigidbodyType2D.Static;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
         if (ItemDropper.Instance != null) ItemDropper.Instance.SpawnNewItem();
         isDropped = false;
         checkedForRest = false;
@@ -81,6 +95,7 @@ public class Item : MonoBehaviour
     public void Drop()
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         transform.parent = null;
         isDropped = true;
     }
