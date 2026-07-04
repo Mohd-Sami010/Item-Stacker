@@ -4,11 +4,23 @@ using TMPro;
 
 public class GameOverUI : MonoBehaviour
 {
+    [Header("Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
+
+    [Header("Money")]
+    [SerializeField] private TextMeshProUGUI moneyEarnedText;
+    [SerializeField] private TextMeshProUGUI totalMoneyText;
+    [SerializeField] private TextMeshProUGUI doubleMoneyText;
+
+    [Header("Buttons")]
+    [SerializeField] private Button adTo2xRewardButton;
     [SerializeField] private Button adToContinueButton;
     [SerializeField] private Button restartButton;
+    [SerializeField] private Button mainMenuButton;
+    [Space(10)]
     [SerializeField] private AdUI adUI;
+    [SerializeField] private GameObject loadingUI;
 
     private bool continuedOnce = false;
 
@@ -17,14 +29,17 @@ public class GameOverUI : MonoBehaviour
         GameManager.Instance.OnGameOver += ShowGameOverUI;
         GameManager.Instance.OnContinue += () =>
         {
-
             StartCoroutine(PlayFadeoutAnimation());
         };
-
+        adTo2xRewardButton.onClick.AddListener(() =>
+        {
+            adUI.ShowAdLoadingUI();
+            PlayCrazyGamesRewardAdToDoubleMoney();
+        });
         adToContinueButton.onClick.AddListener(() =>
         {
             adUI.ShowAdLoadingUI();
-            PlayCrazyGamesRewardAd();
+            PlayCrazyGamesRewardAdToContinue();
         });
         restartButton.onClick.AddListener(() =>
         {
@@ -37,13 +52,56 @@ public class GameOverUI : MonoBehaviour
             }
             else
             {
+                loadingUI.SetActive(true);
                 GameManager.Instance.RestartGame();
+            }
+        });
+        mainMenuButton.onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+            if (GameManager.Instance.ShouldPlayInterstitialAd())
+            {
+
+                adUI.ShowAdLoadingUI();
+                CrazyAdsController.Instance.ShowMidgameAd(onAdComplete: () =>
+                {
+                    GameManager.Instance.LoadMainMenu();
+                });
+            }
+            else
+            {
+                loadingUI.SetActive(true);
+                GameManager.Instance.LoadMainMenu();
             }
         });
 
         gameObject.SetActive(false);
     }
-    private void PlayCrazyGamesRewardAd()
+    private void PlayCrazyGamesRewardAdToDoubleMoney()
+    {
+        CrazyAdsController.Instance.ShowRewardedAd((bool isSuccessful) =>
+        {
+            if (isSuccessful)
+            {
+                adUI.HideAdLoadingUI();
+                adToContinueButton.interactable = false;
+                adTo2xRewardButton.interactable = false;
+                moneyEarnedText.text = $"{ScoreManager.Instance.GetMoneyEarned() * 2}";
+                totalMoneyText.text = $"{ScoreManager.Instance.GetMoney() + ScoreManager.Instance.GetMoneyEarned()}";
+                ScoreManager.Instance.DoubleMoneyEarned();
+                foreach (TextMeshProUGUI text in adTo2xRewardButton.GetComponentsInChildren<TextMeshProUGUI>())
+                {
+                    text.color = Color.gray;
+                }
+                AudioManager.Instance.PlayDoubleMoneySound();
+            }
+            else
+            {
+                adUI.ShowAdFailedUI();
+            }
+        });
+    }
+    private void PlayCrazyGamesRewardAdToContinue()
     {
         CrazyAdsController.Instance.ShowRewardedAd((bool isSuccessful) =>
     {
@@ -73,6 +131,9 @@ public class GameOverUI : MonoBehaviour
 
         scoreText.text = $"{ScoreManager.Instance.GetScore()}";
         highScoreText.text = $"{ScoreManager.Instance.GetHighScore()}";
+        moneyEarnedText.text = $"{ScoreManager.Instance.GetMoneyEarned()}";
+        totalMoneyText.text = $"{ScoreManager.Instance.GetMoney()}";
+        doubleMoneyText.text = $"{ScoreManager.Instance.GetMoneyEarned() * 2}";
         gameObject.SetActive(true);
 
         if (continuedOnce)

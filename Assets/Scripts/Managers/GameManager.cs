@@ -42,7 +42,12 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         playTime = 0f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(2);
+    }
+    public void LoadMainMenu()
+    {
+        playTime = 0f;
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
     }
     public bool ShouldPlayInterstitialAd()
     {

@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource gameOverAudioSource;
     [SerializeField] private AudioSource ambientAudioSource;
     [SerializeField] private AudioSource buttonClickAudioSource;
+    [SerializeField] private AudioSource doubleMoneyAudioSource;
 
     [Header("Crane Audio")]
     [SerializeField] private AudioSource craneSpawnItemAudioSource;
@@ -44,6 +45,10 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonClickSound()
     {
         PlayRandomPitch(buttonClickAudioSource);
+    }
+    public void PlayDoubleMoneySound()
+    {
+        PlayRandomPitch(doubleMoneyAudioSource);
     }
     public void PlayCraneSpawnItemSound()
     {

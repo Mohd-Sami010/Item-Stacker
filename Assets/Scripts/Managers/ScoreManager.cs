@@ -5,6 +5,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
     private int score = 0;
     private int money = 0;
+    private int moneyAtStart = 0;
     private float highestStackHeight = 0f;
 
     public event System.Action OnScoreChanged;
@@ -13,6 +14,8 @@ public class ScoreManager : MonoBehaviour
     {
         Instance = this;
         // PlayerPrefs.SetInt("HighScore", 0);
+        money = PlayerPrefs.GetInt("Money", 0);
+        moneyAtStart = money;
     }
     public void ItemStacked(float itemHeight)
     {
@@ -46,6 +49,17 @@ public class ScoreManager : MonoBehaviour
     public int GetMoney()
     {
         return money;
+    }
+    public int GetMoneyEarned()
+    {
+        return money - moneyAtStart;
+    }
+    public void DoubleMoneyEarned()
+    {
+        int moneyEarned = GetMoneyEarned();
+        money += moneyEarned;
+        PlayerPrefs.SetInt("Money", money);
+        OnScoreChanged?.Invoke();
     }
     public float GetStackHeight()
     {
