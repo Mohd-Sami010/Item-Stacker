@@ -25,8 +25,15 @@ public class MainMenuUI : MonoBehaviour
         {
             shopButton.GetComponent<AudioSource>().Play();
 
-            if (PlayerPrefs.GetInt("ThemeIndex", 0) == 1) PlayerPrefs.SetInt("ThemeIndex", 0);
-            else PlayerPrefs.SetInt("ThemeIndex", 1);
+            // Make shop button change theme and platform type for testing purposes, with 4 modes: 0, 1, 2, 3. 0 = Theme 0, Platform Type 0; 1 = Theme 1, Platform Type 1; 2 = Theme 0, Platform Type 1; 3 = Theme 1, Platform Type 0.
+            int currentTheme = PlayerPrefs.GetInt("ThemeIndex", 0);
+            int currentPlatform = PlayerPrefs.GetInt("PlatformTypeIndex", 0);
+
+            int newTheme = (currentTheme + 1) % 2;
+            int newPlatform = (currentPlatform + 1) % 2;
+
+            PlayerPrefs.SetInt("ThemeIndex", newTheme);
+            PlayerPrefs.SetInt("PlatformTypeIndex", newPlatform);
         });
         highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
 

@@ -10,6 +10,10 @@ public class GameEnvironment : MonoBehaviour
     [SerializeField] private SpriteRenderer backgroundRenderer;
     [SerializeField] private Sprite[] backgroundSprites;
 
+    [Header("Platform")]
+    [SerializeField] private GameObject type0Platform;
+    [SerializeField] private GameObject type1Platform;
+
     [Header("Ground")]
     [SerializeField] private GameObject theme0Ground;
     [SerializeField] private GameObject theme1Ground;
@@ -23,6 +27,11 @@ public class GameEnvironment : MonoBehaviour
 
         theme0Ground.SetActive(themeIndex == 0);
         theme1Ground.SetActive(themeIndex == 1);
+
+        // Set platform based on the saved index
+        int platformIndex = PlayerPrefs.GetInt("PlatformTypeIndex", 0);
+        type0Platform.SetActive(platformIndex == 0);
+        type1Platform.SetActive(platformIndex == 1);
     }
     public int GetThemeIndex()
     {
