@@ -6,6 +6,7 @@ public class GameEnvironment : MonoBehaviour
 
     [Range(0, 1)]
     [SerializeField] private int themeIndex = 0;
+
     [Header("Background")]
     [SerializeField] private SpriteRenderer backgroundRenderer;
     [SerializeField] private Sprite[] backgroundSprites;
