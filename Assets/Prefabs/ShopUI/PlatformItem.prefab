@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5366100865090104202
+--- !u!1001 &4567227126157241464
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -90,7 +90,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6743593460531783492, guid: a9185d83bb5f72a4ba46bfb83b1a0599, type: 3}
       propertyPath: m_Name
-      value: ShopItem
+      value: PlatformItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212851999390026344, guid: a9185d83bb5f72a4ba46bfb83b1a0599, type: 3}
+      propertyPath: m_Color.b
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212851999390026344, guid: a9185d83bb5f72a4ba46bfb83b1a0599, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6487905
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212851999390026344, guid: a9185d83bb5f72a4ba46bfb83b1a0599, type: 3}
+      propertyPath: m_Color.r
+      value: 0.65882355
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644255334801209393, guid: a9185d83bb5f72a4ba46bfb83b1a0599, type: 3}
+      propertyPath: m_text
+      value: 'Platform 1
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675790298825626836, guid: a9185d83bb5f72a4ba46bfb83b1a0599, type: 3}
+      propertyPath: m_text
+      value: 'Platform open by default
+
+'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
