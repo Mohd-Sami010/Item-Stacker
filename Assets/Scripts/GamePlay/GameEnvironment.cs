@@ -22,7 +22,7 @@ public class GameEnvironment : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        themeIndex = PlayerPrefs.GetInt("ThemeIndex", 0);
+        themeIndex = PlayerPrefs.GetInt("SelectedTheme", 0);
         // int backgroundIndex = themeIndex;
         backgroundRenderer.sprite = backgroundSprites[themeIndex];
 
@@ -30,7 +30,7 @@ public class GameEnvironment : MonoBehaviour
         theme1Ground.SetActive(themeIndex == 1);
 
         // Set platform based on the saved index
-        int platformIndex = PlayerPrefs.GetInt("PlatformTypeIndex", 0);
+        int platformIndex = PlayerPrefs.GetInt("SelectedPlatform", 0);
         type0Platform.SetActive(platformIndex == 0);
         type1Platform.SetActive(platformIndex == 1);
     }

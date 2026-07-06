@@ -53,7 +53,14 @@ public class AudioManager : MonoBehaviour
     private void HandleContinue()
     {
         gameOverAudioSource.Stop();
-        theme0AmbientAudioSource.Play();
+        if (GameEnvironment.Instance.GetThemeIndex() == 0)
+        {
+            theme0AmbientAudioSource.Play();
+        }
+        else
+        {
+            theme1AmbientAudioSource.Play();
+        }
     }
     public void PlayButtonClickSound()
     {

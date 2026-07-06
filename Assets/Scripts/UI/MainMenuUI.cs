@@ -6,6 +6,7 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button shopButton;
+    [SerializeField] private GameObject shopUI;
     [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private GameObject loadingUIObject;
 
@@ -15,25 +16,24 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
+        // When playing first time, set the default theme and platform to 0 and 1st shop item to unlocked
+        if (!PlayerPrefs.HasKey("SelectedTheme"))
+        {
+            PlayerPrefs.SetInt("SelectedTheme", 0);
+            PlayerPrefs.SetInt("SelectedPlatform", 0);
+            PlayerPrefs.SetInt("Item_Theme_0", 1); // Unlock the first theme
+            PlayerPrefs.SetInt("Item_Platform_0", 1); // Unlock the first platform
+        }
         playButton.onClick.AddListener(() =>
         {
             loadingUIObject.SetActive(true);
-            playButton.GetComponent<AudioSource>().Play();
+            MenuAudioManager.Instance.PlayButton1ClickSound();
             Invoke(nameof(LoadGameScene), 1f);
         });
         shopButton.onClick.AddListener(() =>
         {
-            shopButton.GetComponent<AudioSource>().Play();
-
-            // Make shop button change theme and platform type for testing purposes, with 4 modes: 0, 1, 2, 3. 0 = Theme 0, Platform Type 0; 1 = Theme 1, Platform Type 1; 2 = Theme 0, Platform Type 1; 3 = Theme 1, Platform Type 0.
-            int currentTheme = PlayerPrefs.GetInt("ThemeIndex", 0);
-            int currentPlatform = PlayerPrefs.GetInt("PlatformTypeIndex", 0);
-
-            int newTheme = (currentTheme + 1) % 2;
-            int newPlatform = (currentPlatform + 1) % 2;
-
-            PlayerPrefs.SetInt("ThemeIndex", newTheme);
-            PlayerPrefs.SetInt("PlatformTypeIndex", newPlatform);
+            MenuAudioManager.Instance.PlayButton2ClickSound();
+            shopUI.SetActive(true);
         });
         highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
 
@@ -42,6 +42,10 @@ public class MainMenuUI : MonoBehaviour
 
         string youtubeURL = "https://www.youtube.com/@SamiCode_Games";
         youtubeButton.onClick.AddListener(() => Application.OpenURL(youtubeURL));
+    }
+    void Start()
+    {
+        MenuAudioManager.Instance.PlayWhoosh1Sound();
     }
     private void LoadGameScene()
     {

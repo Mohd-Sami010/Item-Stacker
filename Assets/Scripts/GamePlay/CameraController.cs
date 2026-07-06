@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour
         Vector3 desiredPosition = new Vector3(0, target.position.y, -10f) + offset;
         if (desiredPosition.y < transform.position.y + deadZone && desiredPosition.y > transform.position.y - deadZone) return;
 
+        if (target.position.y < 0) desiredPosition.y = Mathf.Max(desiredPosition.y, 3.8f);
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime * 5f);
         transform.position = smoothedPosition;
     }
