@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class AdUI : MonoBehaviour
 {
+    public static AdUI Instance { get; private set; }
     [SerializeField] private GameObject adLoadingUI;
     [SerializeField] private GameObject adFailedUI;
 
     private void Awake()
     {
+        Instance = this;
         adLoadingUI.SetActive(false);
         adFailedUI.SetActive(false);
     }

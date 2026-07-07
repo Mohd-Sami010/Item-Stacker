@@ -22,7 +22,10 @@ public class GameEnvironment : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        themeIndex = PlayerPrefs.GetInt("SelectedTheme", 0);
+
+        themeIndex = PlayerPrefs.GetInt("TryingTheme") > -1
+                    ? PlayerPrefs.GetInt("TryingTheme")
+                    : PlayerPrefs.GetInt("SelectedTheme", 0);
         // int backgroundIndex = themeIndex;
         backgroundRenderer.sprite = backgroundSprites[themeIndex];
 
@@ -30,7 +33,10 @@ public class GameEnvironment : MonoBehaviour
         theme1Ground.SetActive(themeIndex == 1);
 
         // Set platform based on the saved index
-        int platformIndex = PlayerPrefs.GetInt("SelectedPlatform", 0);
+        int platformIndex = PlayerPrefs.GetInt("TryingPlatform") > -1
+                            ? PlayerPrefs.GetInt("TryingPlatform")
+                            : PlayerPrefs.GetInt("SelectedPlatform", 0);
+
         type0Platform.SetActive(platformIndex == 0);
         type1Platform.SetActive(platformIndex == 1);
     }
@@ -38,5 +44,11 @@ public class GameEnvironment : MonoBehaviour
     {
         // return PlayerPrefs.GetInt("ThemeIndex", 0);
         return themeIndex;
+    }
+    private void OnDestroy()
+    {
+        // Reset the trying theme when the game environment is destroyed
+        PlayerPrefs.DeleteKey("TryingTheme");
+        PlayerPrefs.DeleteKey("TryingPlatform");
     }
 }

@@ -49,13 +49,21 @@ public class ShopItem : MonoBehaviour
         isLocked = false;
         lockedUI.SetActive(false);
 
-        if (itemType == ItemType.Theme && PlayerPrefs.GetInt("SelectedTheme", 0) == itemIndex)
+        bool isUsingTheme = PlayerPrefs.GetInt("TryingTheme") == itemIndex
+                    ? PlayerPrefs.GetInt("TryingTheme") == itemIndex
+                    : PlayerPrefs.GetInt("SelectedTheme", 0) == itemIndex;
+        bool isUsingPlatform = PlayerPrefs.GetInt("TryingPlatform") == itemIndex
+                    ? PlayerPrefs.GetInt("TryingPlatform") == itemIndex
+                    : PlayerPrefs.GetInt("SelectedPlatform", 0) == itemIndex;
+
+        if (itemType == ItemType.Theme && isUsingTheme)
         {
             useButton.interactable = false;
             useButton.transform.GetChild(0).gameObject.SetActive(false);
             useButton.transform.GetChild(1).gameObject.SetActive(true);
         }
-        else if (itemType == ItemType.Platform && PlayerPrefs.GetInt("SelectedPlatform", 0) == itemIndex)
+
+        else if (itemType == ItemType.Platform && isUsingPlatform)
         {
             useButton.interactable = false;
             useButton.transform.GetChild(0).gameObject.SetActive(false);
@@ -71,15 +79,17 @@ public class ShopItem : MonoBehaviour
         useButton.onClick.AddListener(() =>
         {
             MenuAudioManager.Instance.PlayButton1ClickSound();
-            ShopUI.Instance.StartedUsingItem(itemType, itemIndex);
             if (itemType == ItemType.Theme)
             {
+                PlayerPrefs.SetInt("TryingTheme", -1);
                 PlayerPrefs.SetInt("SelectedTheme", itemIndex);
             }
             else if (itemType == ItemType.Platform)
             {
+                PlayerPrefs.SetInt("TryingPlatform", -1);
                 PlayerPrefs.SetInt("SelectedPlatform", itemIndex);
             }
+            ShopUI.Instance.StartedUsingItem(itemType, itemIndex);
             useButton.interactable = false;
             useButton.transform.GetChild(0).gameObject.SetActive(false);
             useButton.transform.GetChild(1).gameObject.SetActive(true);
@@ -99,7 +109,36 @@ public class ShopItem : MonoBehaviour
                 lockedUI.SetActive(false);
                 unlockedUI.SetActive(true);
                 UnlockedSetUp();
+                ShopUI.Instance.StartedUsingItem(itemType, itemIndex);
             }
+        });
+        tryWithAdButton.onClick.AddListener(() =>
+        {
+            MenuAudioManager.Instance.PlayButton1ClickSound();
+            AdUI.Instance.ShowAdLoadingUI();
+            CrazyAdsController.Instance.ShowRewardedAd((bool isSuccessful) =>
+    {
+        if (isSuccessful)
+        {
+            AdUI.Instance.HideAdLoadingUI();
+            if (itemType == ItemType.Theme)
+            {
+                PlayerPrefs.SetInt("TryingTheme", itemIndex);
+            }
+            else if (itemType == ItemType.Platform)
+            {
+                PlayerPrefs.SetInt("TryingPlatform", itemIndex);
+            }
+            isLocked = false;
+            ShopUI.Instance.StartedUsingItem(itemType, itemIndex);
+            MenuAudioManager.Instance.PlayPurchaseSound();
+            UnlockedSetUp();
+        }
+        else
+        {
+            AdUI.Instance.ShowAdFailedUI();
+        }
+    });
         });
         if (PlayerPrefs.GetInt("Money", 0) < price)
         {
@@ -112,15 +151,19 @@ public class ShopItem : MonoBehaviour
             buyButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
     }
-    private void HandleStartedUsingItem(ShopItem.ItemType type, int index)
+    private void HandleStartedUsingItem(ItemType type, int index)
     {
-        if (type == itemType && index == itemIndex)
+        if (itemType != type || isLocked) return;
+
+        lockedUI.SetActive(false);
+        unlockedUI.SetActive(true);
+        if (itemIndex == index)
         {
             useButton.interactable = false;
             useButton.transform.GetChild(0).gameObject.SetActive(false);
             useButton.transform.GetChild(1).gameObject.SetActive(true);
         }
-        else if (type == itemType)
+        else
         {
             useButton.interactable = true;
             useButton.transform.GetChild(0).gameObject.SetActive(true);
