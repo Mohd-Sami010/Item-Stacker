@@ -507,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3611500977667227486, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
       propertyPath: m_text
-      value: Relaxing and chill
+      value: Calm woodland vibes
       objectReference: {fileID: 0}
     - target: {fileID: 4287938320377536994, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
       propertyPath: m_Type
@@ -991,7 +991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5117379522381576364, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
       propertyPath: m_text
-      value: Default Flat platform
+      value: Balanced flat platform
       objectReference: {fileID: 0}
     - target: {fileID: 5229977359858832457, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
       propertyPath: m_text
@@ -1355,7 +1355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5117379522381576364, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
       propertyPath: m_text
-      value: Walls on sides, Easy at start
+      value: Catch falling letters
       objectReference: {fileID: 0}
     - target: {fileID: 5229977359858832457, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
       propertyPath: m_text
@@ -2174,11 +2174,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5117379522381576364, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
       propertyPath: m_text
-      value: Kal Banaunga
+      value: Extra room to build
       objectReference: {fileID: 0}
     - target: {fileID: 5229977359858832457, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
       propertyPath: m_text
-      value: Platf 3
+      value: Long
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664373561618245136, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664373561618245136, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5c7b4fe4c5c73f4eaf367f71a15650f, type: 3}
+    - target: {fileID: 5664373561618245136, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664373561618245136, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664373561618245136, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7130326697945434940, guid: 5cd86251129dbb14cb13ebc084fdbd81, type: 3}
       propertyPath: m_Name
@@ -2323,6 +2343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeButton: {fileID: 1249099590}
   moneyText: {fileID: 1310741363}
+  addMmoney: 0
   adUI: {fileID: 1678381139}
 --- !u!1 &338067868
 GameObject:
@@ -3617,6 +3638,10 @@ PrefabInstance:
       propertyPath: m_Alpha
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3611500977667227486, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
+      propertyPath: m_text
+      value: Classic urban skyline
+      objectReference: {fileID: 0}
     - target: {fileID: 4287938320377536994, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
       propertyPath: m_Type
       value: 0
@@ -4889,11 +4914,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3611500977667227486, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
       propertyPath: m_text
-      value: Kal banuanga
+      value: Frosty snowy scenery
       objectReference: {fileID: 0}
+    - target: {fileID: 4287938320377536994, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287938320377536994, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5f526dd69691234c9104d6c0b19333f, type: 3}
     - target: {fileID: 4435667554874512315, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
       propertyPath: m_text
-      value: Theme 3
+      value: winter
       objectReference: {fileID: 0}
     - target: {fileID: 6139501069620056677, guid: bf1bf1db97fbad14e9e92ea017bc65a2, type: 3}
       propertyPath: m_Pivot.x

@@ -14,6 +14,7 @@ public class Item : MonoBehaviour
     [Header("Theme Colors")]
     [SerializeField] private Color[] theme0ItemTextMeshColors;
     [SerializeField] private Color[] theme1ItemTextMeshColors;
+    [SerializeField] private Color[] theme2ItemTextMeshColors;
     [SerializeField] private TMP_FontAsset[] themeTextMeshFonts;
 
     private Color[] currentThemeColors;
@@ -30,6 +31,13 @@ public class Item : MonoBehaviour
         if (GameEnvironment.Instance.GetThemeIndex() == 1)
         {
             currentThemeColors = theme1ItemTextMeshColors;
+            textMesh.font = themeTextMeshFonts[GameEnvironment.Instance.GetThemeIndex()];
+            int theme1ColorIndex = Random.Range(0, currentThemeColors.Length);
+            textMesh.color = currentThemeColors[theme1ColorIndex];
+        }
+        else if (GameEnvironment.Instance.GetThemeIndex() == 2)
+        {
+            currentThemeColors = theme2ItemTextMeshColors;
             textMesh.font = themeTextMeshFonts[GameEnvironment.Instance.GetThemeIndex()];
             int theme1ColorIndex = Random.Range(0, currentThemeColors.Length);
             textMesh.color = currentThemeColors[theme1ColorIndex];

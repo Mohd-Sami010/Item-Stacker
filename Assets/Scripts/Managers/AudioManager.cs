@@ -8,8 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioListener audioListener;
 
     [Header("Ambient Audio")]
-    [SerializeField] private AudioSource theme0AmbientAudioSource;
-    [SerializeField] private AudioSource theme1AmbientAudioSource;
+    [SerializeField] private AudioSource[] themeAmbienceAudioSources;
 
     [Header("Other Audio")]
     [SerializeField] private AudioSource gameOverAudioSource;
@@ -34,33 +33,17 @@ public class AudioManager : MonoBehaviour
         GameManager.Instance.OnGameOver += HandleGameOver;
         GameManager.Instance.OnContinue += HandleContinue;
 
-        if (GameEnvironment.Instance.GetThemeIndex() == 0)
-        {
-            theme0AmbientAudioSource.Play();
-            theme1AmbientAudioSource.Stop();
-        }
-        else
-        {
-            theme1AmbientAudioSource.Play();
-            theme0AmbientAudioSource.Stop();
-        }
+        themeAmbienceAudioSources[GameEnvironment.Instance.GetThemeIndex()].Play();
     }
     private void HandleGameOver()
     {
         gameOverAudioSource.Play();
-        theme0AmbientAudioSource.Stop();
+        themeAmbienceAudioSources[GameEnvironment.Instance.GetThemeIndex()].Stop(); ;
     }
     private void HandleContinue()
     {
         gameOverAudioSource.Stop();
-        if (GameEnvironment.Instance.GetThemeIndex() == 0)
-        {
-            theme0AmbientAudioSource.Play();
-        }
-        else
-        {
-            theme1AmbientAudioSource.Play();
-        }
+        themeAmbienceAudioSources[GameEnvironment.Instance.GetThemeIndex()].Play();
     }
     public void PlayButtonClickSound()
     {
