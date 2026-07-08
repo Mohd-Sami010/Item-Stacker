@@ -44,6 +44,7 @@ public class GameOverUI : MonoBehaviour
         restartButton.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayButtonClickSound();
+            bool isAdPlayed = adTo2xRewardButton.interactable; // If 2X reward is taken then don't play transition ad
             if (GameManager.Instance.ShouldPlayInterstitialAd())
             {
 
