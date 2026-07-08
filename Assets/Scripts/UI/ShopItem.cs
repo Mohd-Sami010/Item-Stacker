@@ -49,18 +49,17 @@ public class ShopItem : MonoBehaviour
         isLocked = false;
         lockedUI.SetActive(false);
 
-        bool isUsingTheme = PlayerPrefs.GetInt("TryingTheme") == itemIndex
-                    ? PlayerPrefs.GetInt("TryingTheme") == itemIndex
-                    : PlayerPrefs.GetInt("SelectedTheme", 0) == itemIndex;
-        bool isUsingPlatform = PlayerPrefs.GetInt("TryingPlatform") == itemIndex
-                    ? PlayerPrefs.GetInt("TryingPlatform") == itemIndex
-                    : PlayerPrefs.GetInt("SelectedPlatform", 0) == itemIndex;
+        bool isUsingTheme = PlayerPrefs.GetInt("TryingTheme", -1) == itemIndex
+                            || PlayerPrefs.GetInt("SelectedTheme", 0) == itemIndex;
+        bool isUsingPlatform = PlayerPrefs.GetInt("TryingPlatform", -1) == itemIndex
+                            || PlayerPrefs.GetInt("SelectedPlatform", 0) == itemIndex;
 
         if (itemType == ItemType.Theme && isUsingTheme)
         {
             useButton.interactable = false;
             useButton.transform.GetChild(0).gameObject.SetActive(false);
             useButton.transform.GetChild(1).gameObject.SetActive(true);
+            Debug.Log(gameObject.name + " is Being Used");
         }
 
         else if (itemType == ItemType.Platform && isUsingPlatform)
@@ -68,26 +67,43 @@ public class ShopItem : MonoBehaviour
             useButton.interactable = false;
             useButton.transform.GetChild(0).gameObject.SetActive(false);
             useButton.transform.GetChild(1).gameObject.SetActive(true);
+            Debug.Log(gameObject.name + " is Being Used");
         }
         else
         {
             useButton.interactable = true;
             useButton.transform.GetChild(0).gameObject.SetActive(true);
             useButton.transform.GetChild(1).gameObject.SetActive(false);
+            Debug.Log(gameObject.name + " is Not Being Used");
         }
 
         useButton.onClick.AddListener(() =>
         {
             MenuAudioManager.Instance.PlayButton1ClickSound();
-            if (itemType == ItemType.Theme)
+            string itemKey = "Item_" + itemType.ToString() + "_" + itemIndex;
+            if (PlayerPrefs.GetInt(itemKey, 0) == 1) // If Item is actually unlocked
             {
-                PlayerPrefs.SetInt("TryingTheme", -1);
-                PlayerPrefs.SetInt("SelectedTheme", itemIndex);
+                if (itemType == ItemType.Theme)
+                {
+                    PlayerPrefs.SetInt("TryingTheme", -1);
+                    PlayerPrefs.SetInt("SelectedTheme", itemIndex);
+                }
+                else if (itemType == ItemType.Platform)
+                {
+                    PlayerPrefs.SetInt("TryingPlatform", -1);
+                    PlayerPrefs.SetInt("SelectedPlatform", itemIndex);
+                }
             }
-            else if (itemType == ItemType.Platform)
+            else
             {
-                PlayerPrefs.SetInt("TryingPlatform", -1);
-                PlayerPrefs.SetInt("SelectedPlatform", itemIndex);
+                if (itemType == ItemType.Theme)
+                {
+                    PlayerPrefs.SetInt("TryingTheme", itemIndex);
+                }
+                else if (itemType == ItemType.Platform)
+                {
+                    PlayerPrefs.SetInt("TryingPlatform", itemIndex);
+                }
             }
             ShopUI.Instance.StartedUsingItem(itemType, itemIndex);
             useButton.interactable = false;
@@ -108,6 +124,8 @@ public class ShopItem : MonoBehaviour
                 isLocked = false;
                 lockedUI.SetActive(false);
                 unlockedUI.SetActive(true);
+                if (itemType == ItemType.Theme) PlayerPrefs.SetInt("SelectedTheme", itemIndex);
+                else PlayerPrefs.SetInt("SelectedPlatform", itemIndex);
                 UnlockedSetUp();
                 ShopUI.Instance.StartedUsingItem(itemType, itemIndex);
             }

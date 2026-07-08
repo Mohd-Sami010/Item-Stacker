@@ -96,7 +96,9 @@ MonoBehaviour:
   - {r: 0.7484276, g: 0.481408, b: 0.33184987, a: 1}
   - {r: 0.8867924, g: 0.57730424, b: 0.40435496, a: 1}
   - {r: 0.899371, g: 0.801954, b: 0.55715746, a: 1}
-  theme1ItemTextMeshFont: {fileID: 11400000, guid: e6e76a9226ba60c49b120271468399f5, type: 2}
+  themeTextMeshFonts:
+  - {fileID: 11400000, guid: 86806feef248e5f46a78a2db18e26eb3, type: 2}
+  - {fileID: 11400000, guid: e6e76a9226ba60c49b120271468399f5, type: 2}
 --- !u!1 &2775186709572448071
 GameObject:
   m_ObjectHideFlags: 0

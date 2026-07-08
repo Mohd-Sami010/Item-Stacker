@@ -8,7 +8,7 @@ public class ShopUI : MonoBehaviour
     public static ShopUI Instance { get; private set; }
     [SerializeField] private Button closeButton;
     [SerializeField] private TextMeshProUGUI moneyText;
-    [SerializeField] private int money;
+    // [SerializeField] private int money;
 
     [Header("Others")]
     [SerializeField] private AdUI adUI;
@@ -19,8 +19,7 @@ public class ShopUI : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        // PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("Money", money);
+        // PlayerPrefs.SetInt("Money", money);
 
         animator = GetComponent<Animator>();
         closeButton.onClick.AddListener(() =>

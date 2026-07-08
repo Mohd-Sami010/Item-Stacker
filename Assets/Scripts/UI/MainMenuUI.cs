@@ -4,6 +4,7 @@ using TMPro;
 
 public class MainMenuUI : MonoBehaviour
 {
+    [SerializeField] private bool deleteAllPlayerPrefs = false;
     [SerializeField] private Button playButton;
     [SerializeField] private Button shopButton;
     [SerializeField] private GameObject shopUI;
@@ -16,6 +17,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
+        if (deleteAllPlayerPrefs) PlayerPrefs.DeleteAll();
         // When playing first time, set the default theme and platform to 0 and 1st shop item to unlocked
         if (!PlayerPrefs.HasKey("SelectedTheme"))
         {
