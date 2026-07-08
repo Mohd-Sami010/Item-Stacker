@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemStopEffectPrefab: {fileID: 6861427323839976763, guid: a77cbcb204b207b46b8722f7e8c0ef2a, type: 3}
+  itemStopGoldEffectPrefab: {fileID: 6861427323839976763, guid: 3d7b42ffb9d929d4e8ba527fe9da160a, type: 3}
   textMesh: {fileID: 4691184788588258571}
   theme0ItemTextMeshColors:
   - {r: 1, g: 0, b: 0, a: 1}
