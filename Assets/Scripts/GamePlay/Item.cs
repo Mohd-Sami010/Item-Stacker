@@ -7,8 +7,9 @@ public class Item : MonoBehaviour
     private bool checkedForRest = false;
     private bool hitGround = false;
     private float restTimer = 1f;
-    private float motionDuration = 2f;
+    private float motionDuration = 1f;
 
+    [SerializeField] private float horizontalAirResistance = 4f;
     [SerializeField] private GameObject itemStopEffectPrefab;
     [SerializeField] private TextMeshPro textMesh;
     [Header("Theme Colors")]
@@ -46,6 +47,7 @@ public class Item : MonoBehaviour
     }
     void Update()
     {
+
         if (GameManager.Instance.IsGameOver() || hitGround) return;
         if (isDropped && checkedForRest && rb.velocity.sqrMagnitude < 1.5f)
         {
@@ -73,6 +75,19 @@ public class Item : MonoBehaviour
         if (restTimer <= 0f)
         {
             SetBodyToStatic();
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (isDropped && rb.bodyType == RigidbodyType2D.Dynamic)
+        {
+            Vector2 velocity = rb.velocity;
+            velocity.x = Mathf.MoveTowards(
+                velocity.x,
+                0f,
+                horizontalAirResistance * Time.deltaTime
+            );
+            rb.velocity = velocity;
         }
     }
     private void SetBodyToStatic()

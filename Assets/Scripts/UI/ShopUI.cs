@@ -48,6 +48,7 @@ public class ShopUI : MonoBehaviour
         int currentMoney = PlayerPrefs.GetInt("Money", 0);
         if (currentMoney >= price)
         {
+            MenuAudioManager.Instance.PlayPurchaseSound();
             int oldMoney = currentMoney;
             currentMoney -= price;
 
@@ -56,7 +57,6 @@ public class ShopUI : MonoBehaviour
             StopCoroutine(nameof(AnimateMoney));
             StartCoroutine(AnimateMoney(oldMoney, currentMoney, 0.5f));
 
-            MenuAudioManager.Instance.PlayPurchaseSound();
             OnItemPurchased?.Invoke();
             return true;
         }

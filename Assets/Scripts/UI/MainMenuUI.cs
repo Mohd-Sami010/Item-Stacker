@@ -40,7 +40,10 @@ public class MainMenuUI : MonoBehaviour
         highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
 
         string instagramURL = "https://www.instagram.com/mohd_sami501";
-        instagramButton.onClick.AddListener(() => Application.OpenURL(instagramURL));
+        instagramButton.onClick.AddListener(() =>
+        {
+            Application.OpenURL(instagramURL);
+        });
 
         string youtubeURL = "https://www.youtube.com/@SamiCode_Games";
         youtubeButton.onClick.AddListener(() => Application.OpenURL(youtubeURL));

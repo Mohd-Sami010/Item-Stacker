@@ -8,6 +8,9 @@ public class ItemDropper : MonoBehaviour
     [SerializeField] private GameObject[] itemPrefabList;
     private Item currentItem;
 
+    private float horizontalVelocity;
+    private Vector3 lastPosition;
+
     private void Awake()
     {
         Instance = this;
@@ -19,6 +22,8 @@ public class ItemDropper : MonoBehaviour
     }
     void Start()
     {
+        lastPosition = transform.position;
+
         SpawnItem();
         GameManager.Instance.OnContinue += () =>
         {
@@ -28,6 +33,9 @@ public class ItemDropper : MonoBehaviour
     private void Update()
     {
         Move();
+
+        horizontalVelocity = (transform.position.x - lastPosition.x) / Time.deltaTime;
+        lastPosition = transform.position;
     }
     private void Move()
     {
@@ -46,7 +54,15 @@ public class ItemDropper : MonoBehaviour
     private void DropItem()
     {
         if (currentItem == null) return;
+
         currentItem.Drop();
+
+        Rigidbody2D rb = currentItem.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.velocityX = horizontalVelocity;
+        }
+
         CameraController.Instance.SetTarget(currentItem.transform);
 
         currentItem = null;

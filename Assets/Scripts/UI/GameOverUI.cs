@@ -22,8 +22,6 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private AdUI adUI;
     [SerializeField] private GameObject loadingUI;
 
-    private bool continuedOnce = false;
-
     void Start()
     {
         GameManager.Instance.OnGameOver += ShowGameOverUI;
@@ -33,19 +31,21 @@ public class GameOverUI : MonoBehaviour
         };
         adTo2xRewardButton.onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlayButtonClickSound();
             adUI.ShowAdLoadingUI();
             PlayCrazyGamesRewardAdToDoubleMoney();
         });
         adToContinueButton.onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlayButtonClickSound();
             adUI.ShowAdLoadingUI();
             PlayCrazyGamesRewardAdToContinue();
         });
         restartButton.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayButtonClickSound();
-            bool isAdPlayed = adTo2xRewardButton.interactable; // If 2X reward is taken then don't play transition ad
-            if (GameManager.Instance.ShouldPlayInterstitialAd())
+            bool isAdPlayed = adTo2xRewardButton.interactable;
+            if (GameManager.Instance.ShouldPlayInterstitialAd() && isAdPlayed)
             {
 
                 adUI.ShowAdLoadingUI();
@@ -60,7 +60,8 @@ public class GameOverUI : MonoBehaviour
         mainMenuButton.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayButtonClickSound();
-            if (GameManager.Instance.ShouldPlayInterstitialAd())
+            bool isAdPlayed = adTo2xRewardButton.interactable;
+            if (GameManager.Instance.ShouldPlayInterstitialAd() && isAdPlayed)
             {
 
                 adUI.ShowAdLoadingUI();
@@ -111,7 +112,6 @@ public class GameOverUI : MonoBehaviour
             adUI.HideAdLoadingUI();
             GameManager.Instance.ContinueGame();
             AudioManager.Instance.PlayButtonClickSound();
-            continuedOnce = true;
         }
         else
         {
@@ -136,11 +136,6 @@ public class GameOverUI : MonoBehaviour
         totalMoneyText.text = $"{ScoreManager.Instance.GetMoney()}";
         doubleMoneyText.text = $"{ScoreManager.Instance.GetMoneyEarned() * 2}";
         gameObject.SetActive(true);
-
-        if (continuedOnce)
-        {
-            adToContinueButton.interactable = false;
-        }
     }
     void OnDestroy()
     {

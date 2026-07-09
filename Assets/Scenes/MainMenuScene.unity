@@ -2385,7 +2385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeButton: {fileID: 1249099590}
   moneyText: {fileID: 1310741363}
-  addMmoney: 300
+  addMmoney: 0
   adUI: {fileID: 1678381139}
 --- !u!1 &313044194
 GameObject:
