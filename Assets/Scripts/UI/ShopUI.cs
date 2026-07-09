@@ -37,6 +37,7 @@ public class ShopUI : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         gameObject.SetActive(false);
     }
+
     private void OnEnable()
     {
         MenuAudioManager.Instance.PlayWhoosh2Sound();
@@ -47,14 +48,35 @@ public class ShopUI : MonoBehaviour
         int currentMoney = PlayerPrefs.GetInt("Money", 0);
         if (currentMoney >= price)
         {
+            int oldMoney = currentMoney;
             currentMoney -= price;
+
             PlayerPrefs.SetInt("Money", currentMoney);
-            moneyText.text = currentMoney.ToString();
+
+            StopCoroutine(nameof(AnimateMoney));
+            StartCoroutine(AnimateMoney(oldMoney, currentMoney, 0.5f));
+
             MenuAudioManager.Instance.PlayPurchaseSound();
             OnItemPurchased?.Invoke();
             return true;
         }
         return false;
+    }
+    private IEnumerator AnimateMoney(int startValue, int endValue, float duration)
+    {
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            int value = Mathf.RoundToInt(Mathf.Lerp(startValue, endValue, timer / duration));
+            moneyText.text = value.ToString();
+
+            yield return null;
+        }
+
+        moneyText.text = endValue.ToString();
     }
     public void StartedUsingItem(ShopItem.ItemType itemType, int itemIndex)
     {

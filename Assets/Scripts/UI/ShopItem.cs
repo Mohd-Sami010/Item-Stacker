@@ -59,7 +59,6 @@ public class ShopItem : MonoBehaviour
             useButton.interactable = false;
             useButton.transform.GetChild(0).gameObject.SetActive(false);
             useButton.transform.GetChild(1).gameObject.SetActive(true);
-            Debug.Log(gameObject.name + " is Being Used");
         }
 
         else if (itemType == ItemType.Platform && isUsingPlatform)
@@ -67,14 +66,12 @@ public class ShopItem : MonoBehaviour
             useButton.interactable = false;
             useButton.transform.GetChild(0).gameObject.SetActive(false);
             useButton.transform.GetChild(1).gameObject.SetActive(true);
-            Debug.Log(gameObject.name + " is Being Used");
         }
         else
         {
             useButton.interactable = true;
             useButton.transform.GetChild(0).gameObject.SetActive(true);
             useButton.transform.GetChild(1).gameObject.SetActive(false);
-            Debug.Log(gameObject.name + " is Not Being Used");
         }
 
         useButton.onClick.AddListener(() =>
@@ -128,6 +125,7 @@ public class ShopItem : MonoBehaviour
                 else PlayerPrefs.SetInt("SelectedPlatform", itemIndex);
                 UnlockedSetUp();
                 ShopUI.Instance.StartedUsingItem(itemType, itemIndex);
+                GetComponent<Animator>().SetTrigger("Unlocked");
             }
         });
         tryWithAdButton.onClick.AddListener(() =>
@@ -151,6 +149,7 @@ public class ShopItem : MonoBehaviour
             ShopUI.Instance.StartedUsingItem(itemType, itemIndex);
             MenuAudioManager.Instance.PlayPurchaseSound();
             UnlockedSetUp();
+            GetComponent<Animator>().SetTrigger("Unlocked");
         }
         else
         {
