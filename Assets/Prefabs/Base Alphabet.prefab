@@ -51,7 +51,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
   m_Mass: 0.43873882
-  m_LinearDrag: 0.05
+  m_LinearDrag: 0
   m_AngularDrag: 0.1
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -61,9 +61,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 2
-  m_SleepingMode: 0
-  m_CollisionDetection: 1
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &2137522044723916782
 MonoBehaviour:
@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c681086bcbf9f459339ebee59f4bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalAirResistance: 4
   itemStopEffectPrefab: {fileID: 6861427323839976763, guid: a77cbcb204b207b46b8722f7e8c0ef2a, type: 3}
   textMesh: {fileID: 4691184788588258571}
   theme0ItemTextMeshColors:

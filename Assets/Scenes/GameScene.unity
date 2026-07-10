@@ -5958,8 +5958,8 @@ Transform:
   m_GameObject: {fileID: 1058323668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.69, z: 0}
-  m_LocalScale: {x: 20.300003, y: 6.4813495, z: 1.3499999}
+  m_LocalPosition: {x: 0, y: -4.1357, z: 0}
+  m_LocalScale: {x: 22, y: 7.457579, z: 1.3499999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 938067269}
@@ -6066,7 +6066,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.9359597}
+  m_Size: {x: 2, y: 0.9359597}
   m_EdgeRadius: 0
 --- !u!1 &1074805610
 GameObject:
@@ -6098,10 +6098,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioListener: {fileID: 519420029}
-  themeAmbienceAudioSources:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   gameOverAudioSource: {fileID: 1512022602}
   buttonClickAudioSource: {fileID: 1876091355}
   doubleMoneyAudioSource: {fileID: 1784574222}
@@ -6852,7 +6848,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3b382228ea4468f42ab34c3174a5760e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -8432,7 +8428,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3b382228ea4468f42ab34c3174a5760e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -9714,7 +9710,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3b382228ea4468f42ab34c3174a5760e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -11381,7 +11377,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3b382228ea4468f42ab34c3174a5760e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -11775,7 +11771,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3b382228ea4468f42ab34c3174a5760e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
