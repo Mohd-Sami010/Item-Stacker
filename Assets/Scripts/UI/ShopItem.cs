@@ -131,7 +131,7 @@ public class ShopItem : MonoBehaviour
         tryWithAdButton.onClick.AddListener(() =>
         {
             MenuAudioManager.Instance.PlayButton1ClickSound();
-            AdUI.Instance.ShowAdLoadingUI();
+            AdUI.Instance.ShowAdLoadingUI(AdUI.AdType.RewardAd);
             CrazyAdsController.Instance.ShowRewardedAd((bool isSuccessful) =>
     {
         if (isSuccessful)

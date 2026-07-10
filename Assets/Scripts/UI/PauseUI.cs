@@ -25,7 +25,7 @@ public class PauseUI : MonoBehaviour
             if (GameManager.Instance.ShouldPlayInterstitialAd())
             {
 
-                AdUI.Instance.ShowAdLoadingUI();
+                AdUI.Instance.ShowAdLoadingUI(AdUI.AdType.MidGameAd);
                 CrazyAdsController.Instance.ShowMidgameAd(onAdComplete: () =>
                 {
                     GameManager.Instance.LoadMainMenu();

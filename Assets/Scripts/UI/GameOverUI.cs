@@ -31,13 +31,13 @@ public class GameOverUI : MonoBehaviour
         adTo2xRewardButton.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayButtonClickSound();
-            AdUI.Instance.ShowAdLoadingUI();
+            AdUI.Instance.ShowAdLoadingUI(AdUI.AdType.RewardAd);
             PlayCrazyGamesRewardAdToDoubleMoney();
         });
         adToContinueButton.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayButtonClickSound();
-            AdUI.Instance.ShowAdLoadingUI();
+            AdUI.Instance.ShowAdLoadingUI(AdUI.AdType.RewardAd);
             PlayCrazyGamesRewardAdToContinue();
         });
         restartButton.onClick.AddListener(() =>
@@ -47,7 +47,7 @@ public class GameOverUI : MonoBehaviour
             if (GameManager.Instance.ShouldPlayInterstitialAd() && isAdPlayed)
             {
 
-                AdUI.Instance.ShowAdLoadingUI();
+                AdUI.Instance.ShowAdLoadingUI(AdUI.AdType.MidGameAd);
                 PlayCrazyGamesMidGameAd();
             }
             else
@@ -63,7 +63,7 @@ public class GameOverUI : MonoBehaviour
             if (GameManager.Instance.ShouldPlayInterstitialAd() && isAdPlayed)
             {
 
-                AdUI.Instance.ShowAdLoadingUI();
+                AdUI.Instance.ShowAdLoadingUI(AdUI.AdType.MidGameAd);
                 CrazyAdsController.Instance.ShowMidgameAd(onAdComplete: () =>
                 {
                     GameManager.Instance.LoadMainMenu();

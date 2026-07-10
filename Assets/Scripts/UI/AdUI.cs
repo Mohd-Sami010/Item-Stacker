@@ -6,9 +6,15 @@ public class AdUI : MonoBehaviour
 {
     public static AdUI Instance { get; private set; }
 
+    public enum AdType
+    {
+        MidGameAd,
+        RewardAd,
+    }
     [SerializeField] private GameObject adLoadingUI;
     [SerializeField] private GameObject adFailedUI;
     [SerializeField] private TextMeshProUGUI loadingTextMesh;
+    [SerializeField] private TextMeshProUGUI adTypeTextMesh;
 
     private Coroutine loadingAnimationCoroutine;
 
@@ -19,10 +25,13 @@ public class AdUI : MonoBehaviour
         adFailedUI.SetActive(false);
     }
 
-    public void ShowAdLoadingUI()
+    public void ShowAdLoadingUI(AdType adType)
     {
         adLoadingUI.SetActive(true);
         adFailedUI.SetActive(false);
+
+        if (adType == AdType.MidGameAd) adTypeTextMesh.text = "MidGameAd is loading";
+        if (adType == AdType.MidGameAd) adTypeTextMesh.text = "RewardAd is loading";
 
         if (loadingAnimationCoroutine != null)
             StopCoroutine(loadingAnimationCoroutine);

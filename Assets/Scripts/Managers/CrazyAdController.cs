@@ -119,7 +119,10 @@ public class CrazyAdsController : MonoBehaviour
             (error) =>
             {
                 Debug.LogWarning($"Rewarded ad failed to render: {error}");
-                onAdResult?.Invoke(false); // Return False
+                StartCoroutine(DelayedAdError(() =>
+                {
+                    onAdResult?.Invoke(false);
+                }));
             },
             () =>
             {
