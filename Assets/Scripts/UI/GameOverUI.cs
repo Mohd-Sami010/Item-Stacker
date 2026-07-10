@@ -19,7 +19,6 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private Button mainMenuButton;
     [Space(10)]
-    [SerializeField] private AdUI adUI;
     [SerializeField] private GameObject loadingUI;
 
     void Start()
@@ -32,13 +31,13 @@ public class GameOverUI : MonoBehaviour
         adTo2xRewardButton.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayButtonClickSound();
-            adUI.ShowAdLoadingUI();
+            AdUI.Instance.ShowAdLoadingUI();
             PlayCrazyGamesRewardAdToDoubleMoney();
         });
         adToContinueButton.onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayButtonClickSound();
-            adUI.ShowAdLoadingUI();
+            AdUI.Instance.ShowAdLoadingUI();
             PlayCrazyGamesRewardAdToContinue();
         });
         restartButton.onClick.AddListener(() =>
@@ -48,7 +47,7 @@ public class GameOverUI : MonoBehaviour
             if (GameManager.Instance.ShouldPlayInterstitialAd() && isAdPlayed)
             {
 
-                adUI.ShowAdLoadingUI();
+                AdUI.Instance.ShowAdLoadingUI();
                 PlayCrazyGamesMidGameAd();
             }
             else
@@ -64,7 +63,7 @@ public class GameOverUI : MonoBehaviour
             if (GameManager.Instance.ShouldPlayInterstitialAd() && isAdPlayed)
             {
 
-                adUI.ShowAdLoadingUI();
+                AdUI.Instance.ShowAdLoadingUI();
                 CrazyAdsController.Instance.ShowMidgameAd(onAdComplete: () =>
                 {
                     GameManager.Instance.LoadMainMenu();
@@ -85,7 +84,7 @@ public class GameOverUI : MonoBehaviour
         {
             if (isSuccessful)
             {
-                adUI.HideAdLoadingUI();
+                AdUI.Instance.HideAdLoadingUI();
                 adToContinueButton.interactable = false;
                 adTo2xRewardButton.interactable = false;
                 moneyEarnedText.text = $"{ScoreManager.Instance.GetMoneyEarned() * 2}";
@@ -99,7 +98,7 @@ public class GameOverUI : MonoBehaviour
             }
             else
             {
-                adUI.ShowAdFailedUI();
+                AdUI.Instance.ShowAdFailedUI();
             }
         });
     }
@@ -109,13 +108,13 @@ public class GameOverUI : MonoBehaviour
     {
         if (isSuccessful)
         {
-            adUI.HideAdLoadingUI();
+            AdUI.Instance.HideAdLoadingUI();
             GameManager.Instance.ContinueGame();
             AudioManager.Instance.PlayButtonClickSound();
         }
         else
         {
-            adUI.ShowAdFailedUI();
+            AdUI.Instance.ShowAdFailedUI();
         }
     });
     }

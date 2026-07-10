@@ -27,6 +27,7 @@ public class ItemDropper : MonoBehaviour
         SpawnItem();
         GameManager.Instance.OnContinue += () =>
         {
+            GetComponent<Animator>().SetTrigger("Close");
             StartCoroutine(SpawnNewItemWithAnimation());
         };
     }
@@ -57,10 +58,18 @@ public class ItemDropper : MonoBehaviour
 
         currentItem.Drop();
 
+        GetComponent<Animator>().SetTrigger("Open");
         Rigidbody2D rb = currentItem.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.velocityX = horizontalVelocity;
+            try
+            {
+                rb.velocityX = horizontalVelocity;
+            }
+            catch
+            {
+
+            }
         }
 
         CameraController.Instance.SetTarget(currentItem.transform);
@@ -71,6 +80,7 @@ public class ItemDropper : MonoBehaviour
     public void SpawnNewItem()
     {
         CameraController.Instance.SetTarget(null);
+        GetComponent<Animator>().SetTrigger("Close");
         StartCoroutine(SpawnNewItemWithAnimation());
     }
     private void RotateItem()

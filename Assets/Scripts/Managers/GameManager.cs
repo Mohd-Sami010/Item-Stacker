@@ -41,13 +41,17 @@ public class GameManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        playTime = 0f;
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(2);
+        StartCoroutine(LoadingRoutine(2));
     }
     public void LoadMainMenu()
     {
-        playTime = 0f;
-        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(1);
+        StartCoroutine(LoadingRoutine(1));
+    }
+    private System.Collections.IEnumerator LoadingRoutine(int sceneIndex)
+    {
+        yield return new WaitForSecondsRealtime(1.2f);
+        playTime = 0;
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex);
     }
     public bool ShouldPlayInterstitialAd()
     {
