@@ -84,7 +84,10 @@ public class CrazyAdsController : MonoBehaviour
             (error) =>
             {
                 Debug.LogWarning($"[CrazyAds] Midgame ad error: {error}");
-                onAdComplete?.Invoke(); // still proceed even on error
+                StartCoroutine(DelayedAdError(() =>
+                {
+                    onAdComplete?.Invoke();
+                }));
             },
             () =>
             {
@@ -124,5 +127,10 @@ public class CrazyAdsController : MonoBehaviour
                 onAdResult?.Invoke(true);  // Return True
             }
         );
+    }
+    private System.Collections.IEnumerator DelayedAdError(Action callback)
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        callback?.Invoke();
     }
 }
