@@ -31,7 +31,7 @@ public class AdUI : MonoBehaviour
         adFailedUI.SetActive(false);
 
         if (adType == AdType.MidGameAd) adTypeTextMesh.text = "MidGameAd is loading";
-        if (adType == AdType.MidGameAd) adTypeTextMesh.text = "RewardAd is loading";
+        else adTypeTextMesh.text = "RewardAd is loading";
 
         if (loadingAnimationCoroutine != null)
             StopCoroutine(loadingAnimationCoroutine);

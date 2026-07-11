@@ -47,7 +47,7 @@ public class Item : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (isDropped && rb.bodyType == RigidbodyType2D.Dynamic)
+        if (isDropped && rb.bodyType == RigidbodyType2D.Dynamic && !checkedForRest)
         {
             Vector2 velocity = rb.velocity;
             velocity.x = Mathf.MoveTowards(

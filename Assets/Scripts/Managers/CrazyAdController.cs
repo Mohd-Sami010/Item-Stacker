@@ -133,7 +133,7 @@ public class CrazyAdsController : MonoBehaviour
     }
     private System.Collections.IEnumerator DelayedAdError(Action callback)
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(2f);
         callback?.Invoke();
     }
 }

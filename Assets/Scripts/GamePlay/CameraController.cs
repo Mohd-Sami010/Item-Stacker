@@ -38,6 +38,12 @@ public class CameraController : MonoBehaviour
     }
     public void SetTarget(Transform newTarget)
     {
-        target = newTarget;
+        if (newTarget == null) StartCoroutine(SetTargetRoutine());
+        else target = newTarget;
+    }
+    private System.Collections.IEnumerator SetTargetRoutine()
+    {
+        yield return new WaitForSeconds(1f);
+        target = null;
     }
 }
