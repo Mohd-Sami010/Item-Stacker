@@ -22,7 +22,6 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         if (GameManager.Instance.IsGameOver()) return;
-
         if (target == null)
         {
             float yPosition = transform.parent.position.y > 0 ? 3.8f : 3.8f;
@@ -43,7 +42,7 @@ public class CameraController : MonoBehaviour
     }
     private System.Collections.IEnumerator SetTargetRoutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         target = null;
     }
 }
